@@ -14,10 +14,22 @@ const config = {
         test: /\.js$/ // only apply to files with .js
       },
       {
+        // places css into it's own dir
         loader: ExtractTextPlugin.extract({
           loader: 'css-loader'
         }),
         test: /\.css$/
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            // if less then this, then include in bundle
+            options: { limit: 40000 }
+          },
+          'image-webpack-loader'
+        ]
       }
     ]
   },
